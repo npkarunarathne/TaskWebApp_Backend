@@ -39,9 +39,9 @@ public class TaskItemRepository : ITaskItemRepository
             }
 
             // Filter by Status if provided
-            if (filter.StatusId != null)
+            if (filter.Status != null)
             {
-                query = query.Where(task => task.StatusId == filter.StatusId);
+                query = query.Where(task => task.Status == filter.Status);
             }
 
             return await query.ToListAsync();
@@ -82,7 +82,7 @@ public class TaskItemRepository : ITaskItemRepository
                 Name = taskItem.Name,
                 Description = taskItem.Description,
                 AttachmentUrl= taskItem.AttachmentUrl,
-                StatusId = taskItem.StatusId,
+                Status = taskItem.Status,
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
                 UserId = taskItem.UserId
@@ -112,7 +112,7 @@ public class TaskItemRepository : ITaskItemRepository
                 Name = taskItem.Name,
                 Description = taskItem.Description,
                 AttachmentUrl= taskItem.AttachmentUrl,
-                StatusId = taskItem.StatusId,
+                Status = taskItem.Status,
                 CreatedDate = taskItem.CreatedDate,
                 UpdatedDate = DateTime.Now,
                 UserId = taskItem.UserId

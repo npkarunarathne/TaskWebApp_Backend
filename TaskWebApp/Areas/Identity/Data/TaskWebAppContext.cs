@@ -23,7 +23,28 @@ public class TaskWebAppContext : IdentityDbContext<IdentityUser>
         base.OnModelCreating(builder);
 
         builder.Entity<TaskItem>()
-            .Property(t => t.StatusId)
+            .Property(t => t.Status)
             .HasConversion<string>();
+
+        builder.Entity<TaskItemStatus>().HasData(
+               new TaskItemStatus
+               {
+                   Id = Guid.NewGuid().ToString(),
+                   Status = "Todo",
+                   DisplayOrder = 1
+               },
+               new TaskItemStatus
+               {
+                   Id = Guid.NewGuid().ToString(),
+                   Status = "In Progress",
+                   DisplayOrder = 2
+               },
+               new TaskItemStatus
+               {
+                   Id = Guid.NewGuid().ToString(),
+                   Status = "Done",
+                   DisplayOrder = 3
+               }
+           );
     }
 }
