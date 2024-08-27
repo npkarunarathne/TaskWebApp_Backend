@@ -11,7 +11,7 @@ public class TaskItem
     public string AttachmentUrl { get; set; }
     public string StatusId { get; set; }
     [NotMapped]
-    public TaskStatus Status { get; set; }
+    public TaskItemStatus Status { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
     public string UserId { get; set; }

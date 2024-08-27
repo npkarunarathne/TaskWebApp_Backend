@@ -50,6 +50,7 @@ builder.Services.AddAuthentication(x =>
   });
 
 builder.Services.AddTransient<ITaskItemRepository, TaskItemRepository>();
+builder.Services.AddTransient<ITaskStatusRepository, TaskStatusRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

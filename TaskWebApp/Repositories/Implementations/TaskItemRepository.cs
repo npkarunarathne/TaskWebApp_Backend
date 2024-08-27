@@ -82,7 +82,7 @@ public class TaskItemRepository : ITaskItemRepository
                 Name = taskItem.Name,
                 Description = taskItem.Description,
                 AttachmentUrl= taskItem.AttachmentUrl,
-                Status = taskItem.Status,
+                StatusId = taskItem.StatusId,
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
                 UserId = taskItem.UserId
@@ -112,7 +112,7 @@ public class TaskItemRepository : ITaskItemRepository
                 Name = taskItem.Name,
                 Description = taskItem.Description,
                 AttachmentUrl= taskItem.AttachmentUrl,
-                Status = taskItem.Status,
+                StatusId = taskItem.StatusId,
                 CreatedDate = taskItem.CreatedDate,
                 UpdatedDate = DateTime.Now,
                 UserId = taskItem.UserId
