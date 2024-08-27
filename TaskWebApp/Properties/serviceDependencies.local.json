@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "connectionInfo": "App registration: TaskWebApp, Tenant: Uva Wellassa University (UvaWellassaUniversity403.onmicrosoft.com - Microsoft Entra ID)",
+      "type": "identityapp.default"
+    },
+    "mssql1": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:TaskWebAppContextConnection"
+    }
+  }
+}
