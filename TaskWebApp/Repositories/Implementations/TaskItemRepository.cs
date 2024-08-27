@@ -67,7 +67,7 @@ public class TaskItemRepository : ITaskItemRepository
         }
     }
 
-    public async Task AddAsync(TaskItemDto? taskItem)
+    public async Task<TaskItem> AddAsync(TaskItemDto? taskItem)
     {
         if (taskItem == null)
         {
@@ -78,17 +78,18 @@ public class TaskItemRepository : ITaskItemRepository
         {
             var task = new TaskItem()
             {
-                Id = taskItem.Id,
+                Id =Guid.NewGuid().ToString(),
                 Name = taskItem.Name,
                 Description = taskItem.Description,
                 AttachmentUrl= taskItem.AttachmentUrl,
-                Status = taskItem.Status,
+                Status = "Todo",
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
                 UserId = taskItem.UserId
             };
             _context.TaskItems.Add(task);
             await _context.SaveChangesAsync();
+            return task;
         }
         catch (Exception ex)
         {
@@ -97,7 +98,7 @@ public class TaskItemRepository : ITaskItemRepository
         }
     }
 
-    public async Task UpdateAsync(TaskItemDto? taskItem)
+    public async Task UpdateAsync(TaskUpdateDto? taskItem, string id)
     {
         if (taskItem == null)
         {
@@ -108,21 +109,16 @@ public class TaskItemRepository : ITaskItemRepository
         {
             var task = new TaskItem()
             {
-                Id = taskItem.Id,
-                Name = taskItem.Name,
-                Description = taskItem.Description,
-                AttachmentUrl= taskItem.AttachmentUrl,
+                Id = id,
                 Status = taskItem.Status,
-                CreatedDate = taskItem.CreatedDate,
-                UpdatedDate = DateTime.Now,
-                UserId = taskItem.UserId
+                UpdatedDate = DateTime.Now
             };
             _context.TaskItems.Update(task);
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error in UpdateAsync: {ex.Message}");
+            Console.WriteLine($"Error in UpdateAsync: {ex}");
             throw;
         }
     }

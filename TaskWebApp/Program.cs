@@ -10,6 +10,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using TaskWebApp.Repositories.Implementations;
 using TaskWebApp.Repositories.Interfaces;
+using TaskWebApp.Services.Interfaces;
+using TaskWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("TaskWebAppContextConnection") ?? throw new InvalidOperationException("Connection string 'TaskWebAppContextConnection' not found.");
@@ -48,9 +50,26 @@ builder.Services.AddAuthentication(x =>
       x.SaveToken = true;
       x.TokenValidationParameters = tokenValidationParameters;
   });
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
 
 builder.Services.AddTransient<ITaskItemRepository, TaskItemRepository>();
 builder.Services.AddTransient<ITaskStatusRepository, TaskStatusRepository>();
+
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()   
+                   .AllowAnyHeader()  
+                   .AllowAnyMethod();  
+        });
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -102,6 +121,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
 app.UseRouting();

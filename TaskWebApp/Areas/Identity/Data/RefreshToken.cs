@@ -20,6 +20,7 @@ namespace TaskWebApp.Areas.Identity.Data
         public TaskWebAppContext User { get; set; }
         public DateTime? Revoked { get; set; }
         public bool IsActive => Revoked == null;
+        public bool IsValid => !Used && !Invalidated && DateTime.UtcNow <= ExpiryDate && Revoked == null;
     }
         
 }

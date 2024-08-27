@@ -43,25 +43,15 @@ public class TaskItemsController(ITaskItemRepository repository) : ControllerBas
         var userId = User.FindFirstValue("id");
         taskItem.UserId = userId;
 
-        await repository.AddAsync(taskItem);
-        return CreatedAtAction(nameof(GetById), new { id = taskItem.Id }, taskItem);
+        var result = await repository.AddAsync(taskItem);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, taskItem);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, [FromBody] TaskItemDto taskItem)
+    public async Task<IActionResult> Update(string id, [FromBody] TaskUpdateDto taskItem)
     {
-        if (id != taskItem.Id)
-        {
-            return BadRequest();
-        }
 
-        var existingItem = await repository.GetByIdAsync(id);
-        if (existingItem == null)
-        {
-            return NotFound();
-        }
-
-        await repository.UpdateAsync(taskItem);
+        await repository.UpdateAsync(taskItem,id);
         return NoContent();
     }
 

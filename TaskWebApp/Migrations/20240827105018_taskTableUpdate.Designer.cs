@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskWebApp.Data;
 
@@ -11,9 +12,11 @@ using TaskWebApp.Data;
 namespace TaskWebApp.Migrations
 {
     [DbContext(typeof(TaskWebAppContext))]
-    partial class TaskWebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20240827105018_taskTableUpdate")]
+    partial class taskTableUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,6 +267,7 @@ namespace TaskWebApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AttachmentUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -312,19 +316,19 @@ namespace TaskWebApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e92f0ecd-bec3-4d94-b6d9-be0ac612c3cc",
+                            Id = "1ac7b30e-6e57-4fdf-ac91-5172eb2470bf",
                             DisplayOrder = 1,
                             Status = "Todo"
                         },
                         new
                         {
-                            Id = "59359278-0e7d-4da8-a410-8e94607fa13a",
+                            Id = "5b27052d-9961-4eae-8055-09f0298b4326",
                             DisplayOrder = 2,
                             Status = "In Progress"
                         },
                         new
                         {
-                            Id = "e90dbba1-e4a0-4254-bad9-9d3ea888be32",
+                            Id = "b1321b53-bef0-40f9-8dd2-260334ad433a",
                             DisplayOrder = 3,
                             Status = "Done"
                         });
