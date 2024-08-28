@@ -107,13 +107,16 @@ public class TaskItemRepository : ITaskItemRepository
 
         try
         {
-            var task = new TaskItem()
+            var existingTask = await _context.TaskItems.FindAsync(id);
+            if (existingTask == null)
             {
-                Id = id,
-                Status = taskItem.Status,
-                UpdatedDate = DateTime.Now
-            };
-            _context.TaskItems.Update(task);
+                throw new KeyNotFoundException($"Task with ID {id} not found.");
+            }
+
+            existingTask.Status = taskItem.Status;
+            existingTask.UpdatedDate = DateTime.Now;
+
+            _context.TaskItems.Update(existingTask);
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -122,6 +125,7 @@ public class TaskItemRepository : ITaskItemRepository
             throw;
         }
     }
+
 
     public async Task DeleteAsync(string id)
     {
