@@ -47,12 +47,12 @@ Ensure your `appsettings.json` or `appsettings.Development.json` is configured c
 ### Docker
 If you want to containerize the application with Docker, follow these steps:
 
-1.**Build the Docker image:
+1.**Build the Docker image:**
 
 ```sh
 docker build -f TaskWebApp/Dockerfile . -t nimesh/web
 ```
-2.**Run the Docker container:
+2.**Run the Docker container:**
 
 ```sh
 docker run -it --rm -p "5500:80" nimesh/web
@@ -60,7 +60,7 @@ docker run -it --rm -p "5500:80" nimesh/web
 
 This will build the Docker image for your application and run it in a container, mapping port 5500 on your host machine to port 80 in the container.
 
-3.**Running the Application
+3.**Running the Application**
 Once you've set up everything, you can run the application using:
 
 ```sh
