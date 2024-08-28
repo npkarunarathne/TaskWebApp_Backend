@@ -14,9 +14,9 @@ public class TaskWebAppContext : IdentityDbContext<IdentityUser>
     {
     }
 
-    public DbSet<RefreshToken> RefreshToken { get; set; }
-    public DbSet<TaskItem> TaskItems { get; set; }
-    public DbSet<TaskItemStatus> TaskItemStatus { get; set; }
+    public virtual DbSet<RefreshToken> RefreshToken { get; set; }
+    public virtual DbSet<TaskItem> TaskItems { get; set; }
+    public virtual DbSet<TaskItemStatus> TaskItemStatus { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
