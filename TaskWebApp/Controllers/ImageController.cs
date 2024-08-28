@@ -29,8 +29,11 @@ namespace TaskWebApp.Controllers
                 await file.CopyToAsync(fileStream);
             }
 
-            var relativeFilePath = Path.Combine("uploads", uniqueFileName);
-            return Ok(new { FilePath = relativeFilePath });
+            var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
+            var relativeFilePath = Path.Combine("uploads", uniqueFileName).Replace("\\", "/");
+            var fullUrl = $"{baseUrl}/{relativeFilePath}";
+
+            return Ok(new { FilePath = fullUrl });
         }
     }
 }
